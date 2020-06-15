@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Quicksand:300,500,800" rel="stylesheet">
+  <link href="./style.css" rel="stylesheet">
+
+  <title>SETS game</title>
+</head>
+
+<body>
+  <div class="header">
+    <section class="hero is-dark">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title is-1">
+            SETS
+          </h1>
+          <h2 class="subtitle">
+            online multiplayer
+          </h2>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="container">
+    <div id="end-modal" class="modal">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+        <h3 class="title is-1 has-text-white">Winner!!!</h3>
+        <h3 id="winner" class="title is-1 has-text-white"></h3>
+        <div class="field is-grouped are-large is-grouped-centered">
+          <p class="control">
+            <a class="button is-dark is-large" href="/">Return Home</a>
+          </p>
+          <p class="control">
+            <a id="play-again" class="button is-dark is-large">Play Again</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <ul class="pages">
+      <li class="page selection">
+        <div class="modal is-active">
+          <div class="modal-background"></div>
+          <div class="modal-content">
+            <h3 class="title is-1 has-text-white">Action</h3>
+            <div class="field is-grouped are-large is-grouped-centered">
+              <p class="control">
+                <a id="create" class="button is-dark is-large">Create Game</a>
+              </p>
+              <p class="control">
+                <a id="join" class="button is-dark is-large">Join Game</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="page join">
+        <span class="title is-3">Join Game</span>
+        <div class="field">
+          <div class="control">
+            <label class="label">Username</label>
+            <input class="username-join input is-dark" type="text" placeholder="Username" maxlength="12">
+          </div>
+          <div class="field">
+            <div class="control">
+              <label class="label">Lobby Code</label>
+              <input class="join-code input is-dark" type="text" placeholder="abc123" maxlength="6">
+            </div>
+          </div>
+        </div>
+
+        <a id="join-game" class="button is-dark is-fullwidth">Join Game</a>
+      </li>
+
+      <li class="page create">
+        <span class="title is-3">Create Game</span>
+        <div class="field">
+          <div class="control">
+            <label class="label">Username</label>
+            <input class="username-create input is-dark" type="text" placeholder="Username" maxlength="12">
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <label class="label">Visibility</label>
+            <div class="select is-dark is-fullwidth">
+              <select disabled>
+                <option>Private</option>
+                <option>Public</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <a id="create-game" class="button is-dark is-fullwidth">Create Game</a>
+      </li>
+
+      <li class="page queue">
+        <h1 class="title is-1">Game</h1><br>
+        <h3 id="game-code" class="title is-3">Code</h3><br>
+        <h2 class="title is-2">Players:</h2>
+        <ul class="players">
+        </ul>
+        <div class="notif"></div>
+        
+        <a id="start-game" class="button is-fullwidth is-dark" disabled>Start Game</a>
+      </li>
+      <li class="page game">
+        
+        <div class="board"></div>
+        <div class="s">
+          <table id="scores" class="table is-hoverable">     
+             <thead>
+              <tr>
+                <th>Player</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+            </tbody>
+            </table>
+            <a class="button is-dark" id="reset">Remove Selections</a>
+        </div>
+        <table id="logs" class="table">     
+          <thead>
+           <tr>
+             <th class="player">Player</th>
+             <th class="action">Action</th>
+             <th class="data">Data</th>
+           </tr>
+         </thead>
+         <tbody>
+         </tbody>
+         </table>
+      </li>
+      
+    </ul>
+  </div>
+
+  
+
+  <svg width="0" height="0">
+  <pattern id="striped-red" patternUnits="userSpaceOnUse" width="4" height="8">
+    <path d="M-1,1 H5" style="stroke:#e74c3c; stroke-width:2" />
+  </pattern>
+  <pattern id="striped-green" patternUnits="userSpaceOnUse" width="4" height="8">
+    <path d="M-1,1 H5" style="stroke:#27ae60; stroke-width:2" />
+  </pattern>
+  <pattern id="striped-purple" patternUnits="userSpaceOnUse" width="4" height="8">
+    <path d="M-1,1 H5" style="stroke:#8e44ad; stroke-width:2" />
+  </pattern>
+
+  <pattern id="striped-red-small" patternUnits="userSpaceOnUse" width="6" height="6">
+    <path d="M-1,1 H5" style="stroke:#e74c3c; stroke-width:1" />
+  </pattern>
+  <pattern id="striped-green-small" patternUnits="userSpaceOnUse" width="6" height="6">
+    <path d="M-1,1 H5" style="stroke:#27ae60; stroke-width:1" />
+  </pattern>
+  <pattern id="striped-purple-small" patternUnits="userSpaceOnUse" width="6" height="6">
+    <path d="M-1,1 H5" style="stroke:#8e44ad; stroke-width:1" />
+  </pattern>
+  
+  </svg>
+
+
+
+
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="./socket.io/socket.io.js"></script>
+  <script src="./client.js"></script>
+
+</body>
+</html>

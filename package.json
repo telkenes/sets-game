@@ -1,0 +1,21 @@
+{
+  "name": "sets-game",
+  "version": "1.0.0",
+  "description": "Owo whats this",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "phin": "^3.4.0",
+    "ejs": "^3.0.1",
+    "node-sass-middleware": "^0.11.0",
+    "bulma": "^0.8.0",
+    "socket.io": "^2.3.0"
+  },
+  "engines": {
+    "node": "13.x"
+  },
+  "license": "MIT"
+}

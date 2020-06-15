@@ -1,0 +1,262 @@
+@charset "utf-8";
+
+@import "../node_modules/bulma/bulma.sass";
+
+
+
+//desktop and larger 
+@media only screen and (min-width: 1024px) {
+    .navbar-item {
+        transition: background 0.5s linear;
+        border-radius: 5px;
+        height: 75%;
+        transform: translateY(15%); 
+    }
+}
+
+body {
+    min-height: 100vh;
+    background-color: #b5b5b5;
+    overflow: hidden;
+    padding-bottom: 50px;
+}
+
+//navbar
+.navbar-item {
+    transition: background 0.5s linear;
+}
+
+.navbar-menu.is-active {
+    animation: op 0.5s linear;
+}
+
+@keyframes op {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+
+//hero
+.hero {
+    box-shadow: black 0 0 10px;
+}
+
+//container
+.container {
+    margin-top: 25px;
+    width: 80%;
+}
+
+hr {
+    background-color: $grey;
+}
+
+.pages {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+  
+.page {
+
+    text-align: center;
+}
+
+.page.selection {
+    background: #f1f1f1;
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.5);
+}
+
+.page.create {
+    display: none;
+  }
+
+
+  .page.join {
+    display: none;
+  }  
+
+  .page.queue {
+    display: none;
+  }  
+
+
+  .players {
+    list-style-type:disc;
+    text-align: left;
+    font-size: 25px;
+    font-weight: 500;
+  }
+
+
+@media only screen and (min-width: 1024px) {
+    #cards-container {
+        text-align: center;
+        width: 80%;
+    }
+    .page.join {
+        transform: translateX(50%);
+        width: 50%;
+      }
+    .page.create {
+        transform: translateX(50%);
+        width: 50%;
+      }
+      .page.queue {
+        transform: translateX(50%);
+        width: 50%;
+      }
+}
+
+.button {
+    transition: all 0.5s;
+}
+
+
+.page.game {
+    display: none;
+}
+
+.board {
+    width: 100%;
+    height: auto;
+    border-style: solid;
+    border-radius: 25px;
+    float: left;
+    display: flex;
+    flex: 1;
+    flex-flow: row wrap;
+    @media only screen and (min-width: 1024px) {
+        width: 50%;
+    }
+}
+
+.s {
+    margin-top: 15px;
+    width: 100%;
+    height: auto;
+    float: left;
+    margin-bottom: 15px;
+    @media only screen and (min-width: 1024px) {
+        width: 45%;
+        margin-left: 5%;
+        margin-top: 0;
+        height: 100vh;
+        margin-bottom: 0;
+    }
+    .button {
+      float: left;
+
+    }
+}
+
+//cards
+$green: #27ae60;
+$red: #e74c3c;
+$purple: #8e44ad;
+
+.fill-green path, .fill-green rect {stroke: $green;}
+.fill-purple path, .fill-purple rect {stroke: $purple;}
+.fill-red path, .fill-red rect {stroke: $red;}
+
+.card {
+    margin: 8px;
+    width: calc(33.33% - 16px);
+    padding-top: 20%;
+    cursor: pointer;
+    background: #ffffff;
+    border-radius: 10px;
+    position: relative;
+    border-style: solid;
+    border-color: #ffffff;
+    transition: box-shadow, border-color, transform, opacity .2s linear;
+    opacity: 0;
+    &.fadeIn {
+      opacity: 1;
+      transform: rotateY(0deg);
+    }
+    &.selected {
+        transform: scale(1.05);
+        border-style: solid;
+        border-color: yellow;
+        box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.5);
+    }
+    .card-content {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+    }
+    svg {
+      height: 100%;
+      margin: 0 2%;
+    }
+    path, rect {
+      stroke-width: 4;
+    }
+  }
+
+  #logs {
+      .player {
+          width: 30%;
+      }
+      .action {
+          width: 30%;
+      }
+      .data {
+          width: 40%;
+      }
+      .card-group {
+        display: flex;
+        flex: 1;
+        flex-flow: row wrap;
+      } 
+  }
+
+  .card-small {
+    margin: 2px;
+    width: calc(33.33% - 4px);
+    padding-top: 15%;
+    background: #efefef;
+    border-radius: 10px;
+    position: relative;
+    border-style: solid;
+    border-color: #efefef;
+    transition: box-shadow, border-color, transform .2s linear;
+    .card-content {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      padding: 4px;
+      display: flex;
+      justify-content: center;
+    }
+    svg {
+      height: 100%;
+      width: 20%;
+      margin: -250% 2%;
+    }
+    path, rect {
+      stroke-width: 6;
+    }
+    @media only screen and (min-width: 1024px) {
+        svg {
+            margin: -250% 2%;
+        }
+    }
+  }  
+
+  //others
+  .modal {
+      text-align: center;
+  }

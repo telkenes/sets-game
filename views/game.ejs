@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Quicksand:300,500,800" rel="stylesheet">
+  <link href="./style.css" rel="stylesheet">
+
+  <title>SETS game</title>
+</head>
+
+<body>
+  <div class="header">
+    <section class="hero is-dark">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title is-1">
+            SETS
+          </h1>
+          <h2 class="subtitle">
+            online multiplayer
+          </h2>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="container">
+    <div id="end-modal" class="modal">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+        <h3 class="title is-1 has-text-white">Winner!!!</h3>
+        <h3 id="winner" class="title is-1 has-text-white"></h3>
+        <div class="field is-grouped are-large is-grouped-centered">
+          <p class="control">
+            <a class="button is-dark is-large" href="/">Return Home</a>
+          </p>
+          <p class="control">
+            <a id="play-again" class="button is-dark is-large">Play Again</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <ul class="pages">
+
+      <li class="page">
+        <div class="board"><div id="card-51" class="card fill-purple fadeIn"><div class="card-content"><svg viewBox="-2 -2 54 104"><path d="M38.4,63.4c0,16.1,11,19.9,10.6,28.3c-0.5,9.2-21.1,12.2-33.4,3.8s-15.8-21.2-9.3-38c3.7-7.5,4.9-14,4.8-20 c0-16.1-11-19.9-10.6-28.3C1,0.1,21.6-3,33.9,5.5s15.8,21.2,9.3,38C40.4,50.6,38.5,57.4,38.4,63.4z" fill="#8e44ad"></path></svg><svg viewBox="-2 -2 54 104"><path d="M38.4,63.4c0,16.1,11,19.9,10.6,28.3c-0.5,9.2-21.1,12.2-33.4,3.8s-15.8-21.2-9.3-38c3.7-7.5,4.9-14,4.8-20 c0-16.1-11-19.9-10.6-28.3C1,0.1,21.6-3,33.9,5.5s15.8,21.2,9.3,38C40.4,50.6,38.5,57.4,38.4,63.4z" fill="#8e44ad"></path></svg></div></div><div id="card-26" class="card fill-purple fadeIn"><div class="card-content"><svg viewBox="-2 -2 54 104"><path d="M25,99.5C14.2,99.5,5.5,90.8,5.5,80V20C5.5,9.2,14.2,0.5,25,0.5S44.5,9.2,44.5,20v60 C44.5,90.8,35.8,99.5,25,99.5z" fill="url(#striped-purple)"></path></svg></div></div><div id="card-4" class="card fill-red fadeIn"><div class="card-content"><svg viewBox="-2 -2 54 104"><path d="M25 0 L50 50 L25 100 L0 50 Z" fill="#e74c3c"></path></svg></div></div><div id="card-3" class="card fill-red fadeIn"><div class="card-content"><svg viewBox="-2 -2 54 104"><path d="M38.4,63.4c0,16.1,11,19.9,10.6,28.3c-0.5,9.2-21.1,12.2-33.4,3.8s-15.8-21.2-9.3-38c3.7-7.5,4.9-14,4.8-20 c0-16.1-11-19.9-10.6-28.3C1,0.1,21.6-3,33.9,5.5s15.8,21.2,9.3,38C40.4,50.6,38.5,57.4,38.4,63.4z" fill="none"></path></svg></div></div><div id="card-28" class="card fill-red fadeIn"><div class="card-content"><svg viewBox="-2 -2 54 104"><path d="M25 0 L50 50 L25 100 L0 50 Z" fill="none"></path></svg><svg viewBox="-2 -2 54 104"><path d="M25 0 L50 50 L25 100 L0 50 Z" fill="none"></path></svg></div></div><div id="card-37" class="card fill-green fadeIn"><div class="card-content"><svg viewBox="-2 -2 54 104"><path d="M25 0 L50 50 L25 100 L0 50 Z" fill="none"></path></svg><svg viewBox="-2 -2 54 104"><path d="M25 0 L50 50 L25 100 L0 50 Z" fill="none"></path></svg></div></div><div id="card-35" class="card fill-red fadeIn"><div class="card-content"><svg viewBox="-2 -2 54 104"><path d="M25,99.5C14.2,99.5,5.5,90.8,5.5,80V20C5.5,9.2,14.2,0.5,25,0.5S44.5,9.2,44.5,20v60 C44.5,90.8,35.8,99.5,25,99.5z" fill="url(#striped-red)"></path></svg><svg viewBox="-2 -2 54 104"><path d="M25,99.5C14.2,99.5,5.5,90.8,5.5,80V20C5.5,9.2,14.2,0.5,25,0.5S44.5,9.2,44.5,20v60 C44.5,90.8,35.8,99.5,25,99.5z" fill="url(#striped-red)"></path></svg></div></div><div id="card-2" class="card fill-red fadeIn"><div class="card-content"><svg viewBox="-2 -2 54 104"><path d="M25,99.5C14.2,99.5,5.5,90.8,5.5,80V20C5.5,9.2,14.2,0.5,25,0.5S44.5,9.2,44.5,20v60 C44.5,90.8,35.8,99.5,25,99.5z" fill="none"></path></svg></div></div><div id="card-34" class="card fill-red fadeIn"><div class="card-content"><svg viewBox="-2 -2 54 104"><path d="M25 0 L50 50 L25 100 L0 50 Z" fill="url(#striped-red)"></path></svg><svg viewBox="-2 -2 54 104"><path d="M25 0 L50 50 L25 100 L0 50 Z" fill="url(#striped-red)"></path></svg></div></div><div id="card-18" class="card fill-green fadeIn"><div class="card-content"><svg viewBox="-2 -2 54 104"><path d="M38.4,63.4c0,16.1,11,19.9,10.6,28.3c-0.5,9.2-21.1,12.2-33.4,3.8s-15.8-21.2-9.3-38c3.7-7.5,4.9-14,4.8-20 c0-16.1-11-19.9-10.6-28.3C1,0.1,21.6-3,33.9,5.5s15.8,21.2,9.3,38C40.4,50.6,38.5,57.4,38.4,63.4z" fill="url(#striped-green)"></path></svg></div></div><div id="card-36" class="card fill-red fadeIn"><div class="card-content"><svg viewBox="-2 -2 54 104"><path d="M38.4,63.4c0,16.1,11,19.9,10.6,28.3c-0.5,9.2-21.1,12.2-33.4,3.8s-15.8-21.2-9.3-38c3.7-7.5,4.9-14,4.8-20 c0-16.1-11-19.9-10.6-28.3C1,0.1,21.6-3,33.9,5.5s15.8,21.2,9.3,38C40.4,50.6,38.5,57.4,38.4,63.4z" fill="url(#striped-red)"></path></svg><svg viewBox="-2 -2 54 104"><path d="M38.4,63.4c0,16.1,11,19.9,10.6,28.3c-0.5,9.2-21.1,12.2-33.4,3.8s-15.8-21.2-9.3-38c3.7-7.5,4.9-14,4.8-20 c0-16.1-11-19.9-10.6-28.3C1,0.1,21.6-3,33.9,5.5s15.8,21.2,9.3,38C40.4,50.6,38.5,57.4,38.4,63.4z" fill="url(#striped-red)"></path></svg></div></div><div id="card-21" class="card fill-purple fadeIn"><div class="card-content"><svg viewBox="-2 -2 54 104"><path d="M38.4,63.4c0,16.1,11,19.9,10.6,28.3c-0.5,9.2-21.1,12.2-33.4,3.8s-15.8-21.2-9.3-38c3.7-7.5,4.9-14,4.8-20 c0-16.1-11-19.9-10.6-28.3C1,0.1,21.6-3,33.9,5.5s15.8,21.2,9.3,38C40.4,50.6,38.5,57.4,38.4,63.4z" fill="none"></path></svg></div></div></div>
+        <div class="s">
+          <table id="scores" class="table is-hoverable">     
+             <thead>
+              <tr>
+                <th>Player</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td id="32muef05nn23i0p">a</td><td id="32muef05nn23i0p-s">0</td></tr>
+            </tbody>
+            </table>
+            <a class="button is-dark" id="reset">Remove Selections</a>
+        </div>
+        <table id="logs" class="table">     
+          <thead>
+           <tr>
+             <th class="player">Player</th>
+             <th class="action">Action</th>
+             <th class="data">Data</th>
+           </tr>
+         </thead>
+         <tbody>
+         </tbody>
+         </table>
+      </li>
+      
+    </ul>
+  </div>
+
+  
+
+  <svg width="0" height="0">
+  <pattern id="striped-red" patternUnits="userSpaceOnUse" width="4" height="8">
+    <path d="M-1,1 H5" style="stroke:#e74c3c; stroke-width:2" />
+  </pattern>
+  <pattern id="striped-green" patternUnits="userSpaceOnUse" width="4" height="8">
+    <path d="M-1,1 H5" style="stroke:#27ae60; stroke-width:2" />
+  </pattern>
+  <pattern id="striped-purple" patternUnits="userSpaceOnUse" width="4" height="8">
+    <path d="M-1,1 H5" style="stroke:#8e44ad; stroke-width:2" />
+  </pattern>
+
+  <pattern id="striped-red-small" patternUnits="userSpaceOnUse" width="6" height="6">
+    <path d="M-1,1 H5" style="stroke:#e74c3c; stroke-width:1" />
+  </pattern>
+  <pattern id="striped-green-small" patternUnits="userSpaceOnUse" width="6" height="6">
+    <path d="M-1,1 H5" style="stroke:#27ae60; stroke-width:1" />
+  </pattern>
+  <pattern id="striped-purple-small" patternUnits="userSpaceOnUse" width="6" height="6">
+    <path d="M-1,1 H5" style="stroke:#8e44ad; stroke-width:1" />
+  </pattern>
+  
+  </svg>
+
+
+
+
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+</body>
+</html>
