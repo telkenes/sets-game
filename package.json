@@ -15,7 +15,7 @@
     "socket.io": "^2.3.0"
   },
   "engines": {
-    "node": "13.x"
+    "node": "10.x"
   },
   "license": "MIT"
 }

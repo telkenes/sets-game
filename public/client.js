@@ -46,7 +46,6 @@ $(function () {
 
   socket.on('reconnect', () => {
     console.log('you have been reconnected');
-
   });
 
   socket.on('reconnect_error', () => {
@@ -149,9 +148,14 @@ $("#reset").click(() => {
       e.toggleClass("selected");
       if (selected.length >= 3) l.emit('set', selected)
     });
+    setInterval(() => {
+      let t = Date.now()- data.time
+
+      document.getElementById('time').innerHTML = `Time elapsed: ${humanize(t)}`
+    }, 1000)
   })
 
-  l.on('setTaken', (user, score, boardData, end, users, currentUser) => {
+  l.on('setTaken', (user, score, boardData, end, users, currentUser, totalTime, avgTime) => {
     if (boardData.set) addLog(user.username, 'Took Set', createBoard(boardData.set, true), true, score.added)
     $(`#${user.id.replace(/ /g, '--')}-s`).text(score.s)
     $('.board').html(createBoard(boardData.board, false, boardData.added)) 
@@ -169,18 +173,11 @@ $("#reset").click(() => {
     selected = []
     if (end) {
       $("#winner").text(`${users[0].n} with ${users[0].s} sets!`)
+      let others = users.splice(1, users.length).map(u => `${u.n} | ${u.s}`)
+      $("#others").text(others)
+      $("#facts").text(`Total game time: ${humanize(totalTime)}\nAverage: ${avgTime}`)
       $('#end-modal').toggleClass('is-active')
 
-      $("#play-again").click(() => {
-        $(".page.game").hide();
-        $(".page.selection").hide();
-        let lobby = lcode()
-        $("#create-game").toggleClass("is-loading");
-        socket.emit('createLobby', lobby);
-        l = io('/' + lobby)
-        createLobby(l)
-        l.emit('addUser', currentUser);
-      })
 
     }
   })
@@ -259,3 +256,14 @@ function createid() {
 const paths = ["M25 0 L50 50 L25 100 L0 50 Z", "M25,99.5C14.2,99.5,5.5,90.8,5.5,80V20C5.5,9.2,14.2,0.5,25,0.5S44.5,9.2,44.5,20v60 C44.5,90.8,35.8,99.5,25,99.5z", "M38.4,63.4c0,16.1,11,19.9,10.6,28.3c-0.5,9.2-21.1,12.2-33.4,3.8s-15.8-21.2-9.3-38c3.7-7.5,4.9-14,4.8-20 c0-16.1-11-19.9-10.6-28.3C1,0.1,21.6-3,33.9,5.5s15.8,21.2,9.3,38C40.4,50.6,38.5,57.4,38.4,63.4z"]
 
 
+function humanize(ms) {
+  let seconds = Math.floor(ms / 1000); ms %= 1000;
+        let minutes = Math.floor(seconds / 60); seconds %= 60;
+        let hours = Math.floor(minutes / 60); minutes %= 60;
+        let days = Math.floor(hours / 24); hours %= 24;
+        let written = false;
+        return (days ? (written = true, days + " d") : "") + (written ? ", " : "")
+            + (hours ? (written = true, hours + " h") : "") + (written ? ", " : "")
+            + (minutes ? (written = true, minutes + " m") : "") + (written ? ", " : "")
+            + (seconds ? (written = true, seconds + " s") : "")
+}

@@ -41,9 +41,28 @@ app.get("/api/game", async (req, res) => {
 });
 
 app.get("/api/owo", async (req, res) => {
-  res.send(solutions)
+  res.send({ length: solutions.length, solutions })
 });
 
+app.get("/api/force", async (req, res) => {
+  let dummy = {}
+  for (var i = 0; i < Object.keys(game).length; i++) {
+    /*dummy[Object.keys(game)[i]] = {
+      users: game[Object.keys(game)[i]].users,
+      board: game[Object.keys(game)[i]].board,
+      deck: game[Object.keys(game)[i]].deck
+    }*/
+    dummy[Object.keys(game)[i]] = findSets(game[Object.keys(game)[i]].board)
+  }
+  res.send(dummy)
+})
+
+app.get("/api/force-find", async (req, res) => {
+  if (!req.query.board) return res.send("no board query")
+  let b = req.query.board.split(',').map(x => Number(x))
+  let dummy = findSets(b)
+  res.send(dummy)
+})
 
 
 app.use(function (req, res) {
@@ -114,6 +133,8 @@ io.on('connection', async (socket) => {
       })
 
       s.on('removeUser', () => {
+        console.log('?')
+        /*
         if (addedUser) {
           game[lobby].users = game[lobby].users.filter(x => x.id !== s.id)
           currentGame.emit('leftLobby', lobby, {
@@ -124,19 +145,22 @@ io.on('connection', async (socket) => {
           });
           addedUser = false
           if (game[lobby].users.length === 0 && lobby !== 'lobby') delete game[lobby]
-        }
+        }*/
       });
 
       //game bitch
       s.on('startGame', () => {
         if (game[lobby].started) return
         game[lobby].started = true
+        game[lobby].time = Date.now(),
+        game[lobby].last = [Date.now()]
         deal(lobby)
         currentGame.emit('startGame', {
           started: game[lobby].started,
           users: game[lobby].users,
           board: game[lobby].board,
-          deck: game[lobby].deck
+          deck: game[lobby].deck,
+          time: Date.now()
         })
       })
 
@@ -165,12 +189,20 @@ io.on('connection', async (socket) => {
         let i3 = game[lobby].board.indexOf(c[2])
         let cc = [cards[c[0] - 1], cards[c[1] - 1], cards[c[2] - 1]] //set array
 
-        if (!game[lobby] || !game[lobby].users) return
+        if (!game[lobby] || game[lobby].users.length === 0) return
         //check the set
         if (checkSet(cc)) {
+          if (!game[lobby].users[user]) game[lobby].users[user] = { n: userObj.username, id: userObj.id, s: 0 }
+          /*
+            - Add user score
+            - Add timestamp for set taken
+          */
           game[lobby].users[user].s++;
+          game[lobby].last.push(Date.now())
+
           score.added = 1
           score.s = game[lobby].users[user].s
+    
           if (game[lobby].added || game[lobby].deck.length === 0) {
             //remove card not replace
             game[lobby].board = game[lobby].board.filter(x => x !== c[0] && x !== c[1] && x !== c[2])
@@ -188,8 +220,16 @@ io.on('connection', async (socket) => {
 
           if (findSets(game[lobby].board).length === 0) {
             if (game[lobby].deck.length < 3) {
+              let times = []
+              for (var i = 0; i < game[lobby].last.length; i++) {
+                if (i === 0) continue
+                times.push(game[lobby].last[i] - game[lobby].last[i-1])
+              }
+              let avg = (times.reduce((a, b) => a + b, 0))/(times.length)
+              let totalTime = Date.now() - game[lobby].time 
               //id, score, board data, win, users
-              currentGame.emit('setTaken', userObj, score, boardData, true, game[lobby].users.sort((a, b) => b.s - a.s), s.username)
+              currentGame.emit('setTaken', userObj, score, boardData, true, game[lobby].users.sort((a, b) => b.s - a.s), s.username, totalTime, parseTime(avg))
+              delete game[lobby]
             } else {
               for (var i = 0; i < 3; i++) {
                 if (!boardData.added) boardData.added = []
@@ -397,3 +437,16 @@ for (var i = 0; i < cards.length; i++) {
     }
   }
 }*/
+
+let parseTime = function (ms) {
+        let seconds = Math.floor(ms / 1000); ms %= 1000;
+        let minutes = Math.floor(seconds / 60); seconds %= 60;
+        let hours = Math.floor(minutes / 60); minutes %= 60;
+        let days = Math.floor(hours / 24); hours %= 24;
+        let written = false;
+        return (days ? (written = true, days + " d") : "") + (written ? ", " : "")
+            + (hours ? (written = true, hours + " h") : "") + (written ? ", " : "")
+            + (minutes ? (written = true, minutes + " m") : "") + (written ? ", " : "")
+            + (seconds ? (written = true, seconds + " s") : "") + (written ? ", " : "")
+            + (ms ? Math.round(ms) + " ms" : "");
+    }
